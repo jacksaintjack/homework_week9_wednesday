@@ -2,9 +2,9 @@ import React from 'react';
 import $ from 'jquery';
 import { Link } from 'react-router';
 
-import Artists from './artists'
+// import Artists from './artists'
 
-class Header extends React.Component {
+class Home extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -31,8 +31,7 @@ class Header extends React.Component {
     return (
       <div>
         <header>
-          <h1>Unicorn Friends!</h1>
-            <Link to="/">Home</Link>
+          <h1>Bands Bands Bands!</h1>
             <Link to="login">Login</Link>
         </header>
         {childrenWithProps}
@@ -41,4 +40,4 @@ class Header extends React.Component {
   }
 }
 
-export default Header;
+export default Home;
