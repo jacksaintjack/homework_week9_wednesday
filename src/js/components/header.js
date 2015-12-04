@@ -1,15 +1,44 @@
-import React from 'react'
+import React from 'react';
+import $ from 'jquery';
+import { Link } from 'react-router';
 
-class Header  extends React.Component {
-  render () {
-    return(
-      <div className="header">
-        <img src="http://lorempixel.com/50/50" />
-        <h1>Title</h1>
-        <input type='text' placeholder='Seach' />
+import Artists from './artists'
+
+class Header extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      artists: []
+    };
+    this.handleArtistData = this.handleArtistData.bind(this);
+  }
+
+  handleArtistData(data) {
+    this.setState({artists: data.results})
+  }
+
+  componentDidMount() {
+    $.ajax({
+      url: 'https://api.spotify.com/v1/search?q=Nick&type=artist',
+      success: this.handleArtistData
+    });
+  }
+
+  render() {
+    let childrenWithProps = React.Children.map(this.props.children, child => {
+      return React.cloneElement(child, {artists: this.state.unicorns})
+    });
+    return (
+      <div>
+        <header>
+          <h1>Unicorn Friends!</h1>
+            <Link to="/">Home</Link>
+            <Link to="login">Login</Link>
+        </header>
+        {childrenWithProps}
       </div>
     )
   }
 }
 
-export default Header ;
+export default Header;
